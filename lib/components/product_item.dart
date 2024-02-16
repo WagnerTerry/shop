@@ -15,13 +15,16 @@ class ProductItem extends StatelessWidget {
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: IconButton(
-            onPressed: () {
-              product.toggleFavorite();
-            },
-            icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border),
-            color: Theme.of(context).colorScheme.secondary,
+          // Consumer => O consumer é justamente utilizado pra você envolver somente aquilo que é alterável
+          leading: Consumer<Product>(
+            builder: (ctx, product, _) => IconButton(
+              onPressed: () {
+                product.toggleFavorite();
+              },
+              icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
           title: Text(
             product.title,
