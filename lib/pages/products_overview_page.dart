@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/components/badgee.dart';
 import 'package:shop/components/product_grid.dart';
+import 'package:shop/models/cart.dart';
 
 enum FilterOptions { favorite, all }
 
 class ProductsOverviewPage extends StatefulWidget {
-  const ProductsOverviewPage({super.key});
-
+  const ProductsOverviewPage({Key? key}) : super(key: key);
   @override
   State<ProductsOverviewPage> createState() => _ProductsOverviewPageState();
 }
@@ -41,6 +43,14 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
                 });
               },
             ),
+            Consumer<Cart>(
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_cart),
+              ),
+              builder: (ctx, cart, child) =>
+                  Badgee(child: child!, value: cart.itemsCount.toString()),
+            )
           ],
           centerTitle: true,
         ),
