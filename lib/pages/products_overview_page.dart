@@ -51,8 +51,10 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
                 },
                 icon: const Icon(Icons.shopping_cart),
               ),
-              builder: (ctx, cart, child) =>
-                  Badgee(child: child!, value: cart.itemsCount.toString()),
+              builder: (ctx, cart, child) => Badgee(
+                value: cart.itemsCount.toString(),
+                child: child!,
+              ),
             )
           ],
           centerTitle: true,
