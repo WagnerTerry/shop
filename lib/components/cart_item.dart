@@ -11,7 +11,7 @@ class CartItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(cartItem.id),
-      direction: DismissDirection.endToStart,
+      direction: DismissDirection.endToStart, //somente arrastar do lado direito
       background: Container(
         color: Theme.of(context).errorColor,
         alignment: Alignment.center,
