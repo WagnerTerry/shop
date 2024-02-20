@@ -11,6 +11,8 @@ class AppDrawer extends StatelessWidget {
         children: [
           AppBar(
             title: const Text('Bem vindo usuario'),
+            automaticallyImplyLeading:
+                false, // ocultar drawer , quando estiver aberto
           ),
           const Divider(),
           ListTile(
