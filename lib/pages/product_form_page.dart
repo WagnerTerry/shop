@@ -9,6 +9,16 @@ class ProductFormPage extends StatefulWidget {
 
 class _ProductFormPageState extends State<ProductFormPage> {
   final _priceFocus = FocusNode();
+  final _descriptionFocus = FocusNode();
+
+  @override
+  void dispose() {
+    // dispose -> liberar recursos/memória
+    super.dispose();
+    _priceFocus.dispose();
+    _descriptionFocus.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +43,14 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 focusNode: _priceFocus,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
-              )
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Descrição'),
+                textInputAction: TextInputAction.next,
+                focusNode: _descriptionFocus,
+                keyboardType: TextInputType.multiline,
+                maxLines: 3,
+              ),
             ],
           ),
         ),
