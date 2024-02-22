@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/models/product.dart';
 import 'package:shop/models/product_list.dart';
 
 class ProductFormPage extends StatefulWidget {
-  const ProductFormPage({super.key});
+  const ProductFormPage({Key? key}) : super(key: key);
 
   @override
   State<ProductFormPage> createState() => _ProductFormPageState();
@@ -109,7 +106,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 focusNode: _priceFocus,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
-                onSaved: (price) => _formData['price'] = price ?? '',
+                onSaved: (price) =>
+                    _formData['price'] = double.parse(price ?? ''),
                 validator: (_price) {
                   final priceString = _price ?? '';
                   final price = double.tryParse(priceString) ?? -1;
@@ -154,6 +152,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       textInputAction: TextInputAction.done,
                       focusNode: _imageUrlFocus,
                       controller: _imageUrlController,
+                      onFieldSubmitted: (_) => _submitForm(),
                       onSaved: (imageUrl) =>
                           _formData['imageUrl'] = imageUrl ?? '',
                       // validator: (_imageUrl) {
