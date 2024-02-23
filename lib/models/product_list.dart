@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:shop/data/dummy_data.dart';
 import 'package:http/http.dart' as http;
 import 'package:shop/models/product.dart';
 import 'package:shop/utils/constants.dart';
@@ -10,8 +9,7 @@ import 'package:shop/utils/constants.dart';
 // provider
 class ProductList with ChangeNotifier {
   final _url = Constants.productBaseUrl;
-
-  final List<Product> _items = dummyProducts;
+  final List<Product> _items = [];
 
   List<Product> get items => [..._items]; // [..._items] cópia de items
   List<Product> get favoriteItems =>
@@ -22,8 +20,24 @@ class ProductList with ChangeNotifier {
   }
 
   Future<void> loadProducts() async {
+    _items.clear();
+
     final response = await http.get(Uri.parse(_url));
-    print(jsonDecode(response.body));
+    if (response.body == 'null') return;
+    Map<String, dynamic> data = jsonDecode(response.body);
+    data.forEach((productId, productData) {
+      _items.add(
+        Product(
+          id: productId,
+          name: productData['name'],
+          description: productData['description'],
+          price: productData['price'],
+          imageUrl: productData['imageUrl'],
+          isFavorite: productData['isFavorite'],
+        ),
+      );
+    });
+    notifyListeners();
   }
 
   Future<void> saveProduct(Map<String, Object> data) {
