@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:shop/components/auth_form.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -15,11 +16,13 @@ class AuthPage extends StatelessWidget {
                 gradient: LinearGradient(colors: [
               Color.fromRGBO(215, 117, 255, 0.5),
               Color.fromRGBO(255, 188, 117, 0.9),
-            ])),
+            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
           ),
           SizedBox(
             width: double.infinity,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 20),
@@ -42,7 +45,7 @@ class AuthPage extends StatelessWidget {
                         fontSize: 45, fontFamily: 'Anton', color: Colors.white),
                   ),
                 ),
-                // const AuthForm(),
+                const AuthForm(),
               ],
             ),
           )
