@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatelessWidget {
@@ -18,7 +20,30 @@ class AuthPage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: Column(
-              children: [],
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 70),
+                  // cascade operator -> executa um de cada vez em sequência ex: lista.add()..lista.add()
+                  transform: Matrix4.rotationZ(-8 * pi / 180)..translate(-10.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.deepOrange.shade900,
+                      boxShadow: const [
+                        BoxShadow(
+                            blurRadius: 8,
+                            color: Colors.black26,
+                            offset: Offset(0, 2))
+                      ]),
+                  child: const Text(
+                    'Minha Loja',
+                    style: TextStyle(
+                        fontSize: 45, fontFamily: 'Anton', color: Colors.white),
+                  ),
+                ),
+                // const AuthForm(),
+              ],
             ),
           )
         ],
