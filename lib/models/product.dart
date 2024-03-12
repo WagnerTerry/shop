@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shop/utils/constants.dart';
+import 'package:shop/constants.dart';
 
 // with => mixin
 class Product with ChangeNotifier {
