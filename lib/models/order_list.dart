@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shop/constants.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/cart_item.dart';
 import 'package:shop/models/order.dart';
+import 'package:shop/constants.dart';
 
 class OrderList with ChangeNotifier {
   final String _token;
@@ -29,19 +29,22 @@ class OrderList with ChangeNotifier {
     if (response.body == 'null') return;
     Map<String, dynamic> data = jsonDecode(response.body);
     data.forEach((orderId, orderData) {
-      _items.add(Order(
-        id: orderId,
-        date: DateTime.parse(orderData['date']),
-        total: orderData['total'],
-        products: (orderData['products'] as List<dynamic>).map((item) {
-          return CartItem(
+      items.add(
+        Order(
+          id: orderId,
+          date: DateTime.parse(orderData['date']),
+          total: orderData['total'],
+          products: (orderData['products'] as List<dynamic>).map((item) {
+            return CartItem(
               id: item['id'],
               productId: item['productId'],
               name: item['name'],
               quantity: item['quantity'],
-              price: item['price']);
-        }).toList(),
-      ));
+              price: item['price'],
+            );
+          }).toList(),
+        ),
+      );
     });
 
     _items = items.reversed.toList();
@@ -73,14 +76,15 @@ class OrderList with ChangeNotifier {
     );
 
     final id = jsonDecode(response.body)['name'];
-
     _items.insert(
-        0,
-        Order(
-            id: id,
-            total: cart.totalAmount,
-            date: date,
-            products: cart.items.values.toList()));
+      0,
+      Order(
+        id: id,
+        total: cart.totalAmount,
+        date: date,
+        products: cart.items.values.toList(),
+      ),
+    );
 
     notifyListeners();
   }
